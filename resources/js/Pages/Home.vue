@@ -93,7 +93,7 @@ const updatedPost = (object) => {
 </script>
 
 <template>
-    <Head title="PROJEK MJS" />
+    <Head title="PROJEK MJS CLONE" />
     <MainLayout>
         <div class="mx-auto lg:pl-0 md:pl-[80px] pl-0">
             <Carousel
