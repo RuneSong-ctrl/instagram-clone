@@ -93,7 +93,7 @@ const updatedPost = (object) => {
 </script>
 
 <template>
-    <Head title="Instagram Clone" />
+    <Head title="PROJEK MJS" />
     <MainLayout>
         <div class="mx-auto lg:pl-0 md:pl-[80px] pl-0">
             <Carousel
