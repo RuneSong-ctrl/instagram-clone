@@ -1,28 +1,32 @@
-name : Deploy to Azure Debian MJS
+name: Deploy to Azure Debian MJS
 
-on : 
-  push :
-    branches :
+on:
+  push:
+    branches:
       - main
 
-jobs :
-  deploy : 
-    runs-on : ubuntu-latest
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
 
-    steps :
-      - name : Checkout repository
-        uses : actions/checkout@v3
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name : Deploy via SSH
-        uses : appleboy/ssh-action@master
-        with : 
-          host : ${{secrets.HOST}}
-          username : ${{secrets.USERNAME}}
-          key : ${{secrets.SSH_KEY}}
-          port : ${{secrets.PORT}}
-          script : |
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
             cd /var/www/ai.livens.web.id
+            
+           
             git pull origin main
+            
+            
             export COMPOSER_ALLOW_SUPERUSER=1
             composer install --no-dev --optimize-autoloader
             php artisan migrate --force
@@ -30,10 +34,10 @@ jobs :
             php artisan route:cache
             php artisan view:cache
 
+            
             npm install
             npm run build
 
-            chmod -R 775 storage
-            chmod -R 775 bootstrap/cache
-
+            chmod -R 775 storage bootstrap/cache
+            
             echo "Deployment completed successfully."
