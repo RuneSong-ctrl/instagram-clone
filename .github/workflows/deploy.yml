@@ -15,7 +15,7 @@ jobs :
 
       - name : Deploy via SSH
         uses : appleboy/ssh-action@master
-        with :
+        with : 
           host : ${{secrets.HOST}}
           username : ${{secrets.USERNAME}}
           key : ${{secrets.SSH_KEY}}
@@ -29,8 +29,11 @@ jobs :
             php artisan config:cache
             php artisan route:cache
             php artisan view:cache
-            
-            chmod -R 775 storage 
+
+            npm install
+            npm run build
+
+            chmod -R 775 storage
             chmod -R 775 bootstrap/cache
 
             echo "Deployment completed successfully."
