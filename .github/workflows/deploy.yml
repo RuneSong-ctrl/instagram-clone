@@ -15,10 +15,10 @@ jobs:
       - name: Deploy via SSH
         uses: appleboy/ssh-action@master
         with:
-          # PERHATIKAN: host, username, key harus menjorok masuk (2 spasi) di bawah 'with'
+         
           host: 70.153.138.178
           username: rama
-          key: ${{ secrets.SSH_KEY }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 1777
           script: |
             cd /var/www/ai.livens.web.id
