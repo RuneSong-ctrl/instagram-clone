@@ -1,0 +1,38 @@
+name: Deploy to Azure MJS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: 70.153.138.178
+          username: rama
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 1777
+          script: |
+            cd /var/www/ig.livens.web.id
+            git pull origin main
+            export COMPOSER_ALLOW_SUPERUSER=1
+            composer install --no-dev --optimize-autoloader
+            php artisan migrate --force
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
+
+            npm install
+            npm run build
+
+            sudo chown -R www-data:www-data storage bootstrap/cache
+            sudo chmod -R 775 storage bootstrap/cache
+
+            echo "Deployment completed successfully."
+            
+
+      
