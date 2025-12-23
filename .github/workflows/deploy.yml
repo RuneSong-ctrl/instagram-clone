@@ -26,8 +26,8 @@ jobs:
             php artisan route:cache
             php artisan view:cache
 
-            npm install
-            npm run build
+            sudo npm install
+            sudo npm run build
 
             sudo chown -R www-data:www-data storage bootstrap/cache
             sudo chmod -R 775 storage bootstrap/cache
