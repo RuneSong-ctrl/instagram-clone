@@ -86,7 +86,7 @@ const submit = () => {
             </div>
 
             <div class="mt-4 flex items-center justify-center">
-                Don't have an account?
+                belum punya akun ya?
                 <Link
                     v-if="canResetPassword"
                     :href="route('register')"
